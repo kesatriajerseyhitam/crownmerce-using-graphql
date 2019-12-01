@@ -1,12 +1,11 @@
 import React from 'react';
+import { Query } from 'react-apollo';
+import { gql } from 'apollo-boost';
 
 import CollectionsOverview from './collections-overview.component';
 import Spinner from '../spinner/spinner.component';
 
-import { Query } from 'react-apollo';
-import { gql } from 'apollo-boost';
-
-const GET_COLLECRTIONS = gql`
+const GET_COLLECTIONS = gql`
   {
     collections {
       id
@@ -21,13 +20,13 @@ const GET_COLLECRTIONS = gql`
   }
 `;
 
-const ColelctionsOverviewContainer = () => (
-  <Query query={ GET_COLLECRTIONS }>
+const CollectionsOverviewContainer = () => (
+  <Query query={GET_COLLECTIONS}>
     {({ loading, data }) => {
-      if (loading) return <Spinner />
-      return <CollectionsOverview collections={ data.collections } />;
+      if (loading) return <Spinner />;
+      return <CollectionsOverview collections={data.collections} />;
     }}
   </Query>
-)
+);
 
-export default ColelctionsOverviewContainer;
+export default CollectionsOverviewContainer;
